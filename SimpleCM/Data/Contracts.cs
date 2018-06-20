@@ -14,8 +14,22 @@ namespace SimpleCM.Data
             Add(new Contract("扬州金域蓝湾1期"));
             Add(new Contract("南京朗诗玲珑屿2期"));
             Add(new Contract("苏州保利樾公馆2期"));
+            Add(new Contract("扬州大学体育场"));
+            Add(new Contract("苏州保利樾公馆2期"));
             Add(new Contract("扬州恒大帝京"));
+            Add(new Contract("苏州保利樾公馆2期"));
+            Add(new Contract("苏州保利樾公馆2期"));
             Add(new Contract("扬州恒大帝京"));
+            Add(new Contract("苏州保利樾公馆2期"));
+            Add(new Contract("扬州恒大帝京"));
+            Add(new Contract("苏州保利樾公馆2期"));
+            Add(new Contract("扬州恒大帝京"));
+            Add(new Contract("苏州保利樾公馆2期"));
+            Add(new Contract("扬州金域蓝湾1期"));
+            Add(new Contract("扬州恒大帝京"));
+            Add(new Contract("扬州金域蓝湾1期"));
+            Add(new Contract("扬州恒大帝京"));
+            Add(new Contract("扬州金域蓝湾1期"));
         }
     }
 }
