@@ -1,4 +1,5 @@
 ﻿using SimpleCM.Data;
+using SimpleCM.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +21,31 @@ namespace SimpleCM
     /// </summary>
     public partial class EditWindow : Window
     {
-        private Contract contract = null;
         public EditWindow()
         {
             InitializeComponent();
         }
 
-        public void SetItem(Contract c)
+        private void Submit_btn_Click(object sender, RoutedEventArgs e)
         {
-            contract = c;
+            BillNote billNote = new BillNote();
+            billNote.CompanyName = bill_company_name.Text;
+            billNote.TaxFileNum = bill_tax_number.Text;
+            billNote.Address = bill_address.Text;
+            billNote.Bank = bill_bank_name.Text;
+            billNote.BankAccount = bill_bank_acount.Text;
+            billNote.PhoneNumber = bill_phone.Text;
+
+            Contract contract = DetailEdit.GetContractFromText();
+            if (contract == null)
+            {
+                Log.D("", "项目名不能为空");
+                return;
+            }
+            contract.BillNoteInfo = billNote.Tostring();
+            Contracts.Instance.Add(contract);
+            ContractDB.Instance.Insert(contract);
+            this.Close();
         }
     }
 }

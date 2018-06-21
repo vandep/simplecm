@@ -35,51 +35,51 @@
 
             <TextBlock  Padding="5,5,5,5" Grid.Row="1" Grid.Column="0" 
                             FontSize="14" FontWeight="Bold" Text="项目名称:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="name_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="1" Grid.Column="1"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="contract_name_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="1" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=ContractName}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="0" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="项目编号:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="0" Grid.Column="1"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="contract_num_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="0" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=ContractNumber}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="2" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="项目日期:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="2" Grid.Column="1"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="contract_date_edit"  Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="2" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=ContractDate,Converter={StaticResource TimeConverter}}" />
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="3" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="签约单位:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="3" Grid.Column="1"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="contract_company_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="3" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=ContractCompany}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="4" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="合作单位:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" BorderThickness="2"  BorderBrush="DarkGray" Grid.Row="4" Grid.Column="1"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="cooperator_company_edit" Padding="5,5,5,5" BorderThickness="2"  BorderBrush="DarkGray" Grid.Row="4" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=CooperatorCompany}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="5" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="总费用:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="5" Grid.Column="1"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="cost_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="5" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=Cost,Converter={StaticResource DataConverter}}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="6" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="应收款项一:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="6" Grid.Column="1"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" Padding="5,5,5,5" x:Name="peceivables_1_edit" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="6" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=Peceivables_1,Converter={StaticResource DataConverter}}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="7" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="应收款项二:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" BorderThickness="2" Grid.Row="7" BorderBrush="DarkGray" Grid.Column="1"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" x:Name="peceivables_2_edit" BorderThickness="2" Grid.Row="7" BorderBrush="DarkGray" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=Peceivables_2,Converter={StaticResource DataConverter}}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="8" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="应收款项三:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="8" Grid.Column="1"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" x:Name="peceivables_3_edit" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="8" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=Peceivables_3,Converter={StaticResource DataConverter}}"/>
             <TextBlock  Padding="5,5,5,5"  Grid.Row="9" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="项目描述:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" Padding="5,5,5,5" BorderThickness="2" Grid.Row="10" Grid.Column="0" Text="{Binding Path=ProjectDescription}"
+            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" Padding="5,5,5,5" x:Name="description_edit" BorderThickness="2" Grid.Row="10" Grid.Column="0" Text="{Binding Path=ProjectDescription}"
                              Grid.ColumnSpan="2" FontSize="14" BorderBrush="DarkGray" TextWrapping="Wrap" AcceptsReturn="True"/>
         </Grid>
 

@@ -23,6 +23,7 @@ namespace SimpleCM.Data
         private const string COLUMN_CM_ADDTIONAL_1 = "text_field6";
         private const string COLUMN_CM_ADDTIONAL_2 = "text_field7";
         private const string COLUMN_CM_ADDTIONAL_3 = "text_field8";
+        private const string COLUMN_CM_BILL_NOTE = "text_field9";
         private const string SELECT_ALL_CONTRACTS = "select * from " + CM_TABLE_NAME + " order by " + COLUMN_CM_DATE + " desc";
 
 
@@ -55,7 +56,9 @@ namespace SimpleCM.Data
                     + COLUMN_CM_PE_3 + ","
                     + COLUMN_CM_ADDTIONAL_1 + ","
                     + COLUMN_CM_ADDTIONAL_2 + ","
-                    + COLUMN_CM_ADDTIONAL_3 + ") values("
+                    + COLUMN_CM_ADDTIONAL_3 + ","
+                    + COLUMN_CM_BILL_NOTE
+                    + ") values("
                     + "@" + COLUMN_CM_NUMBER + ","
                     + "@" + COLUMN_CM_NAME + ","
                     + "@" + COLUMN_CM_DATE + ","
@@ -68,7 +71,8 @@ namespace SimpleCM.Data
                     + "@" + COLUMN_CM_PE_3 + ","
                     + "@" + COLUMN_CM_ADDTIONAL_1 + ","
                     + "@" + COLUMN_CM_ADDTIONAL_2 + ","
-                    + "@" + COLUMN_CM_ADDTIONAL_3
+                    + "@" + COLUMN_CM_ADDTIONAL_3 + ","
+                    + "@" + COLUMN_CM_BILL_NOTE
                     + ")";
 
             SQLiteParameter[] parameters = new SQLiteParameter[]{
@@ -84,7 +88,8 @@ namespace SimpleCM.Data
                 new SQLiteParameter("@" + COLUMN_CM_PE_3, contract.Peceivables_3),
                 new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL_1, contract.Aditional_1),
                 new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL_2, contract.Aditional_2),
-                new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL_3, contract.Aditional_3)
+                new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL_3, contract.Aditional_3),
+                new SQLiteParameter("@" + COLUMN_CM_BILL_NOTE, contract.BillNoteInfo)
 
             };
             try
@@ -144,7 +149,7 @@ namespace SimpleCM.Data
             c.Aditional_1 = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL_1);
             c.Aditional_2 = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL_2);
             c.Aditional_3 = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL_3);
-
+            c.BillNoteInfo = sQLiteHelper.ReadString(reader, COLUMN_CM_BILL_NOTE);
             return c;
         }
     }

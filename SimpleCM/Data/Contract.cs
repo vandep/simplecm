@@ -161,8 +161,8 @@ namespace SimpleCM.Data
             }
         }
 
-        private BillNote _billNoteInfo;
-        public BillNote BillNoteInfo
+        private string _billNoteInfo;
+        public string BillNoteInfo
         {
             get => _billNoteInfo;
             set
