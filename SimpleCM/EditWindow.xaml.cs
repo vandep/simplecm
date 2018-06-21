@@ -11,24 +11,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SimpleCM
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// EditWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EditWindow : Window
     {
-        public MainWindow()
+        private Contract contract = null;
+        public EditWindow()
         {
             InitializeComponent();
         }
 
-        private void AddContract_Click(object sender, RoutedEventArgs e)
+        public void SetItem(Contract c)
         {
-            Contracts.Instance.AddContact();
+            contract = c;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (contract != null)
+            {
+                name_edit.Text = contract.ContractName;
+            }
         }
     }
 }

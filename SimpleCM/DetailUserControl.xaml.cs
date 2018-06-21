@@ -1,5 +1,4 @@
-﻿using SimpleCM.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,18 +16,13 @@ using System.Windows.Shapes;
 namespace SimpleCM
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// DetailUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DetailUserControl : UserControl
     {
-        public MainWindow()
+        public DetailUserControl()
         {
             InitializeComponent();
-        }
-
-        private void AddContract_Click(object sender, RoutedEventArgs e)
-        {
-            Contracts.Instance.AddContact();
         }
     }
 }
