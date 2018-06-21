@@ -1,18 +1,7 @@
 ﻿using SimpleCM.Data;
+using SimpleCM.Tools;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SimpleCM
 {
@@ -28,7 +17,23 @@ namespace SimpleCM
 
         private void AddContract_Click(object sender, RoutedEventArgs e)
         {
-            Contracts.Instance.AddContact();
+            try
+            {
+                EditWindow editWindow = new EditWindow
+                {
+                    Owner = this
+                };
+                editWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Log.E("", "show add contract window error:" + ex.Message);
+            }
+        }
+
+        private void Delete_Contract(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

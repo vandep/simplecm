@@ -30,13 +30,5 @@ namespace SimpleCM
         {
             contract = c;
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (contract != null)
-            {
-                name_edit.Text = contract.ContractName;
-            }
-        }
     }
 }

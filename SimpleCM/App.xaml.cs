@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using SimpleCM.Data;
+using System.Threading;
 using System.Windows;
 
 namespace SimpleCM
@@ -13,5 +9,10 @@ namespace SimpleCM
     /// </summary>
     public partial class App : Application
     {
+        private void App_Startup(object sender, StartupEventArgs e)
+        {
+            ContractDB.Instance.CreateTable();
+            ContractDB.Instance.LoadAll();
+        }
     }
 }

@@ -4,7 +4,6 @@ namespace SimpleCM.Data
 {
     public class Contract: INotifyPropertyChanged
     {
-        private static long seq = 1;
         private string _contractNumber;
         public string ContractNumber
         {
@@ -129,11 +128,50 @@ namespace SimpleCM.Data
             }
         }
 
-        public Contract(string name)
+        private string _aditional_1;
+        public string Aditional_1
         {
-            _contractName = name;
-            _contractNumber = (seq++).ToString();
+            get => _aditional_1;
+            set
+            {
+                _aditional_1 = value;
+                OnPropertyChanged("Aditional_1");
+            }
         }
+
+        private string _aditional_2;
+        public string Aditional_2
+        {
+            get => _aditional_2;
+            set
+            {
+                _aditional_2 = value;
+                OnPropertyChanged("Aditional_2");
+            }
+        }
+
+        private string _aditional_3;
+        public string Aditional_3
+        {
+            get => _aditional_3;
+            set
+            {
+                _aditional_3 = value;
+                OnPropertyChanged("Aditional_3");
+            }
+        }
+
+        private BillNote _billNoteInfo;
+        public BillNote BillNoteInfo
+        {
+            get => _billNoteInfo;
+            set
+            {
+                _billNoteInfo = value;
+                OnPropertyChanged("BillNoteInfo");
+            }
+        }
+
 
         public override string ToString() => ContractName;
 
