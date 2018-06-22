@@ -2,6 +2,7 @@
 using SimpleCM.Tools;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -48,7 +49,10 @@ namespace SimpleCM
         private void Addtion_list_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             string v = (string)(((ListBox)sender).SelectedItem);
-            Process.Start(new ProcessStartInfo(v));
+            if (File.Exists(v))
+            {
+                Process.Start(new ProcessStartInfo(v));
+            }            
         }
     }
 }
