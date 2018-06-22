@@ -1,5 +1,5 @@
 ﻿using SimpleCM.Data;
-using System.Threading;
+using SimpleCM.Tools;
 using System.Windows;
 
 namespace SimpleCM
@@ -13,6 +13,12 @@ namespace SimpleCM
         {
             ContractDB.Instance.CreateTable();
             ContractDB.Instance.LoadAll();
+            IniFile.CreateInstance();
+            if (string.IsNullOrEmpty(IniFile.Instance.GetPwd()))
+            {
+                IniFile.Instance.SetPwd("123456");
+            }
+
         }
     }
 }

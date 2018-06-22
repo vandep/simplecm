@@ -19,7 +19,7 @@ namespace SimpleCM.Data
             }
             catch
             {
-                return 0;
+                return "";
             }
 
         }
@@ -36,11 +36,11 @@ namespace SimpleCM.Data
             try
             {
                 long weight = (long)value;
-                return weight + "￥";
+                return weight + "";
             }
             catch
             {
-                return 0;
+                return "";
             }
 
         }

@@ -35,18 +35,44 @@
 
             <TextBlock  Padding="5,5,5,5" Grid.Row="1" Grid.Column="0" 
                             FontSize="14" FontWeight="Bold" Text="项目名称:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="contract_name_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="1" Grid.Column="1"
+            <Grid Grid.Row="1" Grid.Column="1">
+                <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="contract_name_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" 
                              FontSize="14" Text="{Binding Path=ContractName}"/>
+                <TextBlock Visibility="Collapsed" x:Name="tip_name_eidt" Text="(**必填**)" Margin="20,0,20,0" VerticalAlignment="Center" FontSize="14" FontStyle="Italic" Foreground="red" HorizontalAlignment="Right"/>
+            </Grid>
+
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="0" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="项目编号:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="contract_num_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="0" Grid.Column="1"
+            <Grid Grid.Row="0" Grid.Column="1">
+                <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="contract_num_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" 
                              FontSize="14" Text="{Binding Path=ContractNumber}"/>
+                <TextBlock Visibility="Collapsed" x:Name="tip_num_eidt" Text="(**必填**)" Margin="20,0,20,0" VerticalAlignment="Center" FontSize="14" FontStyle="Italic" Foreground="red" HorizontalAlignment="Right"/>
+            </Grid>
+
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="2" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="项目日期:"/>
-            <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="contract_date_edit"  Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="2" Grid.Column="1"
-                             FontSize="14" Text="{Binding Path=ContractDate,Converter={StaticResource TimeConverter}}" />
+            <Grid x:Name="date_edit" Visibility="Collapsed" Grid.Row="2" Grid.Column="1">
+                <DatePicker x:Name="contract_date_edit" Grid.Row="2" HorizontalAlignment="Left" Width="150"
+                    SelectedDateFormat="Long" FirstDayOfWeek="Monday" VerticalAlignment="Stretch"
+                    DisplayDateStart="2012/1/1" DisplayDateEnd="2030/12/31" IsTodayHighlighted="False"/>
+                <TextBlock x:Name="tip_datepick" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" FontStyle="Italic"  Margin="20,0,20,0" Text="(也可以选择手动输入，如输入:2018/1/1，回车)"/>
+            </Grid>
+            <TextBox x:Name="date_show" Visibility="Visible" IsReadOnly="{Binding Path=IsReadOnly}" Grid.Row="2" Grid.Column="1" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" 
+                             FontSize="14" Text="{Binding Path=ContractDate,Converter={StaticResource TimeConverter}}">
+                <!--<TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsReadOnly}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>-->
+            </TextBox>
+
+
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="3" Grid.Column="0"
                              FontSize="14" FontWeight="Bold" Text="签约单位:"/>
@@ -59,22 +85,22 @@
                              FontSize="14" Text="{Binding Path=CooperatorCompany}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="5" Grid.Column="0"
-                             FontSize="14" FontWeight="Bold" Text="总费用:"/>
+                             FontSize="14" FontWeight="Bold" Text="总费用(￥):"/>
             <TextBox IsReadOnly="{Binding Path=IsReadOnly}" x:Name="cost_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="5" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=Cost,Converter={StaticResource DataConverter}}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="6" Grid.Column="0"
-                             FontSize="14" FontWeight="Bold" Text="应收款项一:"/>
+                             FontSize="14" FontWeight="Bold" Text="应收款项一(￥):"/>
             <TextBox IsReadOnly="{Binding Path=IsReadOnly}" Padding="5,5,5,5" x:Name="peceivables_1_edit" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="6" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=Peceivables_1,Converter={StaticResource DataConverter}}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="7" Grid.Column="0"
-                             FontSize="14" FontWeight="Bold" Text="应收款项二:"/>
+                             FontSize="14" FontWeight="Bold" Text="应收款项二(￥):"/>
             <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" x:Name="peceivables_2_edit" BorderThickness="2" Grid.Row="7" BorderBrush="DarkGray" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=Peceivables_2,Converter={StaticResource DataConverter}}"/>
 
             <TextBlock  Padding="5,5,5,5"  Grid.Row="8" Grid.Column="0"
-                             FontSize="14" FontWeight="Bold" Text="应收款项三:"/>
+                             FontSize="14" FontWeight="Bold" Text="应收款项三(￥):"/>
             <TextBox IsReadOnly="{Binding Path=IsReadOnly}"  Padding="5,5,5,5" x:Name="peceivables_3_edit" BorderThickness="2" BorderBrush="DarkGray" Grid.Row="8" Grid.Column="1"
                              FontSize="14" Text="{Binding Path=Peceivables_3,Converter={StaticResource DataConverter}}"/>
             <TextBlock  Padding="5,5,5,5"  Grid.Row="9" Grid.Column="0"

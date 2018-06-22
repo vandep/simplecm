@@ -20,12 +20,11 @@ namespace SimpleCM.Data
         private const string COLUMN_CM_PE_2 = "int_field4";
         private const string COLUMN_CM_PE_3 = "int_field5";
 
-        private const string COLUMN_CM_ADDTIONAL_1 = "text_field6";
-        private const string COLUMN_CM_ADDTIONAL_2 = "text_field7";
-        private const string COLUMN_CM_ADDTIONAL_3 = "text_field8";
-        private const string COLUMN_CM_BILL_NOTE = "text_field9";
-        private const string SELECT_ALL_CONTRACTS = "select * from " + CM_TABLE_NAME + " order by " + COLUMN_CM_DATE + " desc";
+        private const string COLUMN_CM_ADDTIONAL = "text_field6";
 
+        private const string COLUMN_CM_BILL_NOTE = "text_field7";
+        private const string SELECT_ALL_CONTRACTS = "select * from " + CM_TABLE_NAME + " order by " + COLUMN_CM_DATE + " desc";
+        private const string DELETE_CONTRACT = "delete from " + CM_TABLE_NAME + " where " + COLUMN_CM_NUMBER + "=@" + COLUMN_CM_NUMBER;
 
         private readonly SQLiteHelper sQLiteHelper;
 
@@ -54,9 +53,7 @@ namespace SimpleCM.Data
                     + COLUMN_CM_PE_1 + ","
                     + COLUMN_CM_PE_2 + ","
                     + COLUMN_CM_PE_3 + ","
-                    + COLUMN_CM_ADDTIONAL_1 + ","
-                    + COLUMN_CM_ADDTIONAL_2 + ","
-                    + COLUMN_CM_ADDTIONAL_3 + ","
+                    + COLUMN_CM_ADDTIONAL + ","
                     + COLUMN_CM_BILL_NOTE
                     + ") values("
                     + "@" + COLUMN_CM_NUMBER + ","
@@ -69,9 +66,7 @@ namespace SimpleCM.Data
                     + "@" + COLUMN_CM_PE_1 + ","
                     + "@" + COLUMN_CM_PE_2 + ","
                     + "@" + COLUMN_CM_PE_3 + ","
-                    + "@" + COLUMN_CM_ADDTIONAL_1 + ","
-                    + "@" + COLUMN_CM_ADDTIONAL_2 + ","
-                    + "@" + COLUMN_CM_ADDTIONAL_3 + ","
+                    + "@" + COLUMN_CM_ADDTIONAL + ","
                     + "@" + COLUMN_CM_BILL_NOTE
                     + ")";
 
@@ -86,9 +81,7 @@ namespace SimpleCM.Data
                 new SQLiteParameter("@" + COLUMN_CM_PE_1, contract.Peceivables_1),
                 new SQLiteParameter("@" + COLUMN_CM_PE_2, contract.Peceivables_2),
                 new SQLiteParameter("@" + COLUMN_CM_PE_3, contract.Peceivables_3),
-                new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL_1, contract.Aditional_1),
-                new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL_2, contract.Aditional_2),
-                new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL_3, contract.Aditional_3),
+                new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL, contract.Aditionals),
                 new SQLiteParameter("@" + COLUMN_CM_BILL_NOTE, contract.BillNoteInfo)
 
             };
@@ -132,6 +125,16 @@ namespace SimpleCM.Data
             }
         }
 
+        public int Delete(Contract contract)
+        {
+            SQLiteParameter[] paras = new SQLiteParameter[]
+            {
+                new SQLiteParameter("@" + COLUMN_CM_NUMBER, contract.ContractNumber)
+            };
+            return sQLiteHelper.ExecuteNonQuery(DELETE_CONTRACT, paras);
+            
+        }
+
         private Contract ReadContract(SQLiteDataReader reader)
         {
             Contract c = new Contract();
@@ -146,10 +149,9 @@ namespace SimpleCM.Data
             c.Peceivables_1 = sQLiteHelper.ReadLong(reader, COLUMN_CM_PE_1);
             c.Peceivables_2 = sQLiteHelper.ReadLong(reader, COLUMN_CM_PE_2);
             c.Peceivables_3 = sQLiteHelper.ReadLong(reader, COLUMN_CM_PE_3);
-            c.Aditional_1 = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL_1);
-            c.Aditional_2 = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL_2);
-            c.Aditional_3 = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL_3);
+            c.Aditionals = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL);
             c.BillNoteInfo = sQLiteHelper.ReadString(reader, COLUMN_CM_BILL_NOTE);
+            c.IsReadOnly = true;
             return c;
         }
     }

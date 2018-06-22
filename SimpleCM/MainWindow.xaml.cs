@@ -1,7 +1,9 @@
 ﻿using SimpleCM.Data;
 using SimpleCM.Tools;
 using System;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SimpleCM
 {
@@ -31,9 +33,22 @@ namespace SimpleCM
             }
         }
 
-        private void Delete_Contract(object sender, RoutedEventArgs e)
+        private void DeleteContract_Click(object sender, RoutedEventArgs e)
+        {
+            Contract contract = (Contract)contract_list_box.SelectedItem;
+            Contracts.Instance.Remove(contract);
+            ContractDB.Instance.Delete(contract);
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Addtion_list_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            string v = (string)(((ListBox)sender).SelectedItem);
+            Process.Start(new ProcessStartInfo(v));
         }
     }
 }

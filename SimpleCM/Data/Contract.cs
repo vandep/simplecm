@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace SimpleCM.Data
 {
@@ -117,7 +118,7 @@ namespace SimpleCM.Data
 
         public string Undefined { set; get; }
 
-        private bool _isReadOnly = true;
+        private bool _isReadOnly = false;
         public bool IsReadOnly
         {
             get => _isReadOnly;
@@ -128,39 +129,36 @@ namespace SimpleCM.Data
             }
         }
 
-        private string _aditional_1;
-        public string Aditional_1
+        private string _aditionals;
+        public string Aditionals
         {
-            get => _aditional_1;
+            get => _aditionals;
             set
             {
-                _aditional_1 = value;
-                OnPropertyChanged("Aditional_1");
+                _aditionals = value;
+                OnPropertyChanged("Aditionals");
             }
         }
 
-        private string _aditional_2;
-        public string Aditional_2
+        public ObservableCollection<string> AddtionList
         {
-            get => _aditional_2;
-            set
+            get
             {
-                _aditional_2 = value;
-                OnPropertyChanged("Aditional_2");
+                ObservableCollection<string> list = new ObservableCollection<string>();
+                if (!string.IsNullOrEmpty(_aditionals))
+                {
+                    string[] infos = _aditionals.Split(' ');
+                    if (infos != null && infos.Length > 0)
+                    {
+                        for (int i = 0; i < infos.Length; i++)
+                        {
+                            list.Add(infos[i]);
+                        }
+                    }
+                }
+                return list;
             }
         }
-
-        private string _aditional_3;
-        public string Aditional_3
-        {
-            get => _aditional_3;
-            set
-            {
-                _aditional_3 = value;
-                OnPropertyChanged("Aditional_3");
-            }
-        }
-
         private string _billNoteInfo;
         public string BillNoteInfo
         {

@@ -165,7 +165,7 @@ namespace SimpleCM.Tools
                     string path = PathUtils.GetLogPath();
 
                     path += "\\" + LOG_FILE_NAME;
-                    Debug.WriteLine("DVPFS Log Path: " + path);
+                    Debug.WriteLine("Log Path: " + path);
 
                     if (File.Exists(path))
                     {
@@ -179,7 +179,7 @@ namespace SimpleCM.Tools
 
                     logHolder = new TextWriterTraceListener(path, "LogHelper");
 
-                    I("Log:Init", "----Log Start");
+                    
                 }
                 catch (Exception e)
                 {

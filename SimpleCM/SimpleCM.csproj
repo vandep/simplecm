@@ -40,6 +40,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\3rdParty\System.Data.SQLite.DLL</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,9 +63,17 @@
     <Compile Include="DetailUserControl.xaml.cs">
       <DependentUpon>DetailUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditPasswordWindow.xaml.cs">
+      <DependentUpon>EditPasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\EncryptUtil.cs" />
+    <Compile Include="Tools\IniFile.cs" />
     <Compile Include="Tools\Log.cs" />
     <Compile Include="Tools\PathUtils.cs" />
     <Compile Include="Tools\SQLiteHelper.cs" />
@@ -73,7 +82,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +136,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\zapya_common_input_modify_default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\zapya_common_input_modify_pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\zapya_common_input_frame.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

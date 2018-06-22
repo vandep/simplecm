@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:SimpleCM"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="编辑窗口" Height="630" Width="750">
+        Title="编辑窗口" Height="830" Width="750">
+
+    <Window.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,4,10,4"/>
+        </Style>
+    </Window.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
             <Grid>
@@ -45,8 +52,12 @@
                 <TextBlock Grid.Row="2" Grid.Column="2" Margin="2" FontSize="14" Padding="4" Text="账号"/>
                 <TextBox x:Name="bill_bank_acount" Grid.Row="2" Grid.Column="3" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
             </Grid>
-
-
+            <StackPanel Orientation="Horizontal">
+                <Button FontSize="14" Margin="20,0,10,0" HorizontalAlignment="Left" FontWeight="Bold" Padding="5,5,5,5" Click="OnChangePath">添加附件</Button>
+                <Button FontSize="14" Margin="20,0,10,0" HorizontalAlignment="Left" FontWeight="Bold" Padding="5,5,5,5" Click="OnDelPath">删除附件</Button>
+                <TextBlock Margin="2" FontSize="14" Padding="4" Foreground="Red" Text="(注意:附件路径中不要包含空格!)"/>
+            </StackPanel>
+            <ListBox x:Name="addtion_list" HorizontalAlignment="Left" Width="550" Height="120" Margin="20" IsSynchronizedWithCurrentItem="True"></ListBox>
         </StackPanel>
     </ScrollViewer>
 

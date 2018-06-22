@@ -12,7 +12,8 @@
         public string Undefined { set; get; }
         public string Tostring()
         {
-            string format = @"项目名称:{0}\n公司名称:{1}\n纳税人识别号:{2}\n地址:{3}\n电话:{4}\n银行:{5}\n账号{6}";
+            //不能加@,否则原样输出\r\n,不换行
+            string format = "项目名称:{0}\r\n公司名称:{1}\r\n纳税人识别号:{2}\r\n地址:{3}\r\n电话:{4}\r\n银行:{5}\r\n账号:{6}";
             return string.Format(format, ProjectName, CompanyName, TaxFileNum,
                 Address, PhoneNumber, Bank, BankAccount);
         }
