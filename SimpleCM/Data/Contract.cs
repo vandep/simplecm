@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using SimpleCM.Tools;
+using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace SimpleCM.Data
@@ -15,6 +17,16 @@ namespace SimpleCM.Data
             }
 
             get => _contractNumber;
+        }
+        private string _projectCategory;
+        public string ProjectCategory
+        {
+            get => _projectCategory;
+            set
+            {
+                _projectCategory = value;
+                OnPropertyChanged("ProjectCategory");
+            }
         }
 
         private string _contractName;
@@ -116,6 +128,24 @@ namespace SimpleCM.Data
             }
         }
 
+        private string _baseInfo;
+        string format = "项目编号:{0}\n项目名称:{1}\n项目类别:{2}\n项目日期:{3}\n签约单位:{4}\n合作单位:{5}\n项目描述:{6}";
+        
+        public string BaseInfo
+        {
+            get
+            {
+                DateTime datetime = Util.GetTimeFromMillis(ContractDate);
+                string dateInfo = string.Format("{0}年{1}月{2}日", datetime.Year, datetime.Month, datetime.Day);
+                return string.Format(format, ContractNumber, ContractName, ProjectCategory,
+                    dateInfo, ContractCompany, CooperatorCompany, ProjectDescription);
+            }
+            set
+            {
+                _baseInfo = value;
+                OnPropertyChanged("BaseInfo");
+            }
+        }
         public string Undefined { set; get; }
 
         private bool _isReadOnly = false;

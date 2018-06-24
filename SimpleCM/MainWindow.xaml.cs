@@ -54,5 +54,23 @@ namespace SimpleCM
                 Process.Start(new ProcessStartInfo(v));
             }            
         }
+
+        private void Modify_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Contract contract = (Contract)contract_list_box.SelectedItem;
+            if (contract == null)
+            {
+                return;
+            }
+            if (contract.IsReadOnly)
+            {
+                modify_btn.Content = "保存";
+                contract.IsReadOnly = false;
+            }
+            else
+            {
+
+            }
+        }
     }
 }

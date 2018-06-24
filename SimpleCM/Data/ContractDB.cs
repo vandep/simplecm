@@ -23,6 +23,7 @@ namespace SimpleCM.Data
         private const string COLUMN_CM_ADDTIONAL = "text_field6";
 
         private const string COLUMN_CM_BILL_NOTE = "text_field7";
+        private const string COLUMN_PROJECT_CATE = "text_field8";
         private const string SELECT_ALL_CONTRACTS = "select * from " + CM_TABLE_NAME + " order by " + COLUMN_CM_DATE + " desc";
         private const string DELETE_CONTRACT = "delete from " + CM_TABLE_NAME + " where " + COLUMN_CM_NUMBER + "=@" + COLUMN_CM_NUMBER;
 
@@ -54,7 +55,8 @@ namespace SimpleCM.Data
                     + COLUMN_CM_PE_2 + ","
                     + COLUMN_CM_PE_3 + ","
                     + COLUMN_CM_ADDTIONAL + ","
-                    + COLUMN_CM_BILL_NOTE
+                    + COLUMN_CM_BILL_NOTE + ","
+                    + COLUMN_PROJECT_CATE
                     + ") values("
                     + "@" + COLUMN_CM_NUMBER + ","
                     + "@" + COLUMN_CM_NAME + ","
@@ -67,7 +69,8 @@ namespace SimpleCM.Data
                     + "@" + COLUMN_CM_PE_2 + ","
                     + "@" + COLUMN_CM_PE_3 + ","
                     + "@" + COLUMN_CM_ADDTIONAL + ","
-                    + "@" + COLUMN_CM_BILL_NOTE
+                    + "@" + COLUMN_CM_BILL_NOTE + ","
+                    + "@" + COLUMN_PROJECT_CATE
                     + ")";
 
             SQLiteParameter[] parameters = new SQLiteParameter[]{
@@ -82,7 +85,8 @@ namespace SimpleCM.Data
                 new SQLiteParameter("@" + COLUMN_CM_PE_2, contract.Peceivables_2),
                 new SQLiteParameter("@" + COLUMN_CM_PE_3, contract.Peceivables_3),
                 new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL, contract.Aditionals),
-                new SQLiteParameter("@" + COLUMN_CM_BILL_NOTE, contract.BillNoteInfo)
+                new SQLiteParameter("@" + COLUMN_CM_BILL_NOTE, contract.BillNoteInfo),
+                new SQLiteParameter("@" + COLUMN_PROJECT_CATE, contract.ProjectCategory)
 
             };
             try
@@ -151,6 +155,7 @@ namespace SimpleCM.Data
             c.Peceivables_3 = sQLiteHelper.ReadLong(reader, COLUMN_CM_PE_3);
             c.Aditionals = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL);
             c.BillNoteInfo = sQLiteHelper.ReadString(reader, COLUMN_CM_BILL_NOTE);
+            c.ProjectCategory = sQLiteHelper.ReadString(reader, COLUMN_PROJECT_CATE);
             c.IsReadOnly = true;
             return c;
         }
