@@ -38,26 +38,32 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" FontSize="14" Padding="4" Text="单位名称"/>
-                <TextBox x:Name="bill_company_name" Grid.Row="0" Grid.Column="1" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
+                <TextBox x:Name="bill_company_name" Grid.Row="0" Grid.Column="1" Text="{Binding BillNoteCompanyName}"
+                         Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
                 <TextBlock Grid.Row="0" Grid.Column="2" Margin="2" FontSize="14" Padding="4" Text="识别号"/>
-                <TextBox x:Name="bill_tax_number" Grid.Row="0" Grid.Column="3" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
+                <TextBox x:Name="bill_tax_number" Grid.Row="0" Grid.Column="3" Text="{Binding BillNoteTaxFileNum}"
+                         Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" FontSize="14" Padding="4" Text="地址"/>
-                <TextBox x:Name="bill_address" Grid.Row="1" Grid.Column="1" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
+                <TextBox x:Name="bill_address" Grid.Row="1" Grid.Column="1" Text="{Binding BillNoteAddress}"
+                         Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
                 <TextBlock Grid.Row="1" Grid.Column="2" Margin="2" FontSize="14" Padding="4" Text="电话"/>
-                <TextBox x:Name="bill_phone" Grid.Row="1" Grid.Column="3" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
+                <TextBox x:Name="bill_phone" Grid.Row="1" Grid.Column="3" Text="{Binding BillNotePhoneNumber}"
+                         Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Margin="2" FontSize="14" Padding="4" Text="开户行"/>
-                <TextBox x:Name="bill_bank_name" Grid.Row="2" Grid.Column="1" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
+                <TextBox x:Name="bill_bank_name" Grid.Row="2" Grid.Column="1" Text="{Binding BillNoteBank}"
+                         Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Margin="2" FontSize="14" Padding="4" Text="账号"/>
-                <TextBox x:Name="bill_bank_acount" Grid.Row="2" Grid.Column="3" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
+                <TextBox x:Name="bill_bank_acount" Grid.Row="2" Grid.Column="3" Text="{Binding BillNoteBankAccount}"
+                         Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" FontSize="14"/>
             </Grid>
             <StackPanel Orientation="Horizontal">
                 <Button FontSize="14" Margin="20,0,10,0" HorizontalAlignment="Left" FontWeight="Bold" Padding="5,5,5,5" Click="OnChangePath">添加附件</Button>
                 <Button FontSize="14" Margin="20,0,10,0" HorizontalAlignment="Left" FontWeight="Bold" Padding="5,5,5,5" Click="OnDelPath">删除附件</Button>
                 <TextBlock Margin="2" FontSize="14" Padding="4" Foreground="Red" Text="(注意:附件路径中不要包含空格!)"/>
             </StackPanel>
-            <ListBox x:Name="addtion_list" HorizontalAlignment="Left" Width="550" Height="120" Margin="20" IsSynchronizedWithCurrentItem="True"></ListBox>
+            <ListBox x:Name="addtion_list" HorizontalAlignment="Left" Width="550" Height="120" Margin="20" IsSynchronizedWithCurrentItem="True"/>
         </StackPanel>
     </ScrollViewer>
 

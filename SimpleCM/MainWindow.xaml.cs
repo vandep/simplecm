@@ -38,7 +38,7 @@ namespace SimpleCM
         {
             Contract contract = (Contract)contract_list_box.SelectedItem;
             Contracts.Instance.Remove(contract);
-            ContractDB.Instance.Delete(contract);
+            ContractDB.Instance.DeleteItem(contract);
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
@@ -58,19 +58,13 @@ namespace SimpleCM
         private void Modify_btn_Click(object sender, RoutedEventArgs e)
         {
             Contract contract = (Contract)contract_list_box.SelectedItem;
-            if (contract == null)
+            if (contract != null)
             {
-                return;
+                EditWindow ew = new EditWindow();
+                ew.SetData(contract);
+                ew.ShowDialog();
             }
-            if (contract.IsReadOnly)
-            {
-                modify_btn.Content = "保存";
-                contract.IsReadOnly = false;
-            }
-            else
-            {
 
-            }
         }
     }
 }

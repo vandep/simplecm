@@ -26,6 +26,22 @@ namespace SimpleCM.Data
         private const string COLUMN_PROJECT_CATE = "text_field8";
         private const string SELECT_ALL_CONTRACTS = "select * from " + CM_TABLE_NAME + " order by " + COLUMN_CM_DATE + " desc";
         private const string DELETE_CONTRACT = "delete from " + CM_TABLE_NAME + " where " + COLUMN_CM_NUMBER + "=@" + COLUMN_CM_NUMBER;
+        private const string UPDATE_CONTRACT = "UPDATE cm_list set "
+                                                + COLUMN_CM_NUMBER + "=@" + COLUMN_CM_NUMBER + ","
+                                                + COLUMN_CM_NAME + "=@" + COLUMN_CM_NAME + ","
+                                                + COLUMN_CM_DATE + "=@" + COLUMN_CM_DATE + ","
+                                                + COLUMN_CM_DESCRIPTION + "=@" + COLUMN_CM_DESCRIPTION + ","
+                                                + COLUMN_CM_COMPANY + "=@" + COLUMN_CM_COMPANY + ","
+                                                + COLUMN_CM_COOPERATOR + "=@" + COLUMN_CM_COOPERATOR + ","
+                                                + COLUMN_CM_COST + "=@" + COLUMN_CM_COST + ","
+                                                + COLUMN_CM_PE_1 + "=@" + COLUMN_CM_PE_1 + ","
+                                                + COLUMN_CM_PE_2 + "=@" + COLUMN_CM_PE_2 + ","
+                                                + COLUMN_CM_PE_3 + "=@" + COLUMN_CM_PE_3 + ","
+                                                + COLUMN_CM_ADDTIONAL + "=@" + COLUMN_CM_ADDTIONAL + ","
+                                                + COLUMN_CM_BILL_NOTE + "=@" + COLUMN_CM_BILL_NOTE + ","
+                                                + COLUMN_PROJECT_CATE + "=@" + COLUMN_PROJECT_CATE
+                                                + " where id=@id";
+
 
         private readonly SQLiteHelper sQLiteHelper;
 
@@ -41,7 +57,7 @@ namespace SimpleCM.Data
             sQLiteHelper.CreateTable(CM_TABLE_NAME);
         }
 
-        public int Insert(Contract contract)
+        public int InsertItem(Contract contract)
         {
             string sql = "INSERT INTO " + CM_TABLE_NAME + "("
                     + COLUMN_CM_NUMBER + ","
@@ -115,7 +131,7 @@ namespace SimpleCM.Data
                 {
                     try
                     {
-                        Contract c = ReadContract(reader);
+                        Contract c = ReadItem(reader);
                         if (c != null && !string.IsNullOrEmpty(c.ContractName))
                         {
                             Contracts.Instance.Add(c);
@@ -129,7 +145,7 @@ namespace SimpleCM.Data
             }
         }
 
-        public int Delete(Contract contract)
+        public int DeleteItem(Contract contract)
         {
             SQLiteParameter[] paras = new SQLiteParameter[]
             {
@@ -139,10 +155,10 @@ namespace SimpleCM.Data
             
         }
 
-        private Contract ReadContract(SQLiteDataReader reader)
+        private Contract ReadItem(SQLiteDataReader reader)
         {
             Contract c = new Contract();
-
+            c.Id = reader.GetInt64(0);
             c.ContractNumber = sQLiteHelper.ReadString(reader, COLUMN_CM_NUMBER);
             c.ContractName = sQLiteHelper.ReadString(reader, COLUMN_CM_NAME);
             c.ContractDate = sQLiteHelper.ReadLong(reader, COLUMN_CM_DATE);
@@ -156,8 +172,42 @@ namespace SimpleCM.Data
             c.Aditionals = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL);
             c.BillNoteInfo = sQLiteHelper.ReadString(reader, COLUMN_CM_BILL_NOTE);
             c.ProjectCategory = sQLiteHelper.ReadString(reader, COLUMN_PROJECT_CATE);
-            c.IsReadOnly = true;
+            c.FromBillNoteString();
             return c;
+        }
+
+        public bool UpdateItem(long id, Contract contract)
+        {
+            SQLiteParameter[] parameters = new SQLiteParameter[]{
+                new SQLiteParameter("@" + COLUMN_CM_NUMBER, contract.ContractNumber),
+                new SQLiteParameter("@" + COLUMN_CM_NAME, contract.ContractName),
+                new SQLiteParameter("@" + COLUMN_CM_DATE, contract.ContractDate),
+                new SQLiteParameter("@" + COLUMN_CM_DESCRIPTION, contract.ProjectDescription),
+                new SQLiteParameter("@" + COLUMN_CM_COMPANY, contract.ContractCompany),
+                new SQLiteParameter("@" + COLUMN_CM_COOPERATOR, contract.CooperatorCompany),
+                new SQLiteParameter("@" + COLUMN_CM_COST, contract.Cost),
+                new SQLiteParameter("@" + COLUMN_CM_PE_1, contract.Peceivables_1),
+                new SQLiteParameter("@" + COLUMN_CM_PE_2, contract.Peceivables_2),
+                new SQLiteParameter("@" + COLUMN_CM_PE_3, contract.Peceivables_3),
+                new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL, contract.Aditionals),
+                new SQLiteParameter("@" + COLUMN_CM_BILL_NOTE, contract.BillNoteInfo),
+                new SQLiteParameter("@" + COLUMN_PROJECT_CATE, contract.ProjectCategory),
+                new SQLiteParameter("@id", id)
+            };
+            try
+            {
+                int rows = sQLiteHelper.ExecuteNonQuery(UPDATE_CONTRACT, parameters);
+                if (rows > 0)
+                {
+                    return true;
+                };
+                return false;
+            }
+            catch (Exception e)
+            {
+                Log.E("", e.Message);
+                return false;
+            }
         }
     }
 }

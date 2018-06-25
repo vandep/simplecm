@@ -15,13 +15,12 @@ namespace SimpleCM
             InitializeComponent();
         }
 
-        public void SetEditMode()
-        {
-            date_edit.Visibility = System.Windows.Visibility.Visible;
-            date_show.Visibility = System.Windows.Visibility.Collapsed;
-            tip_name_eidt.Visibility = System.Windows.Visibility.Visible;
-            tip_num_eidt.Visibility = System.Windows.Visibility.Visible;
-        }
+        //public void SetEditMode()
+        //{
+        //    date_edit.Visibility = System.Windows.Visibility.Visible;
+        //    tip_name_eidt.Visibility = System.Windows.Visibility.Visible;
+        //    tip_num_eidt.Visibility = System.Windows.Visibility.Visible;
+        //}
 
         public Contract GetContractFromText()
         {

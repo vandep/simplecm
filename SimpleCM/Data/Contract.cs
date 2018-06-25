@@ -7,7 +7,9 @@ namespace SimpleCM.Data
 {
     public class Contract: INotifyPropertyChanged
     {
+        public long Id { get; set; }
         private string _contractNumber;
+
         public string ContractNumber
         {
             set
@@ -129,7 +131,9 @@ namespace SimpleCM.Data
         }
 
         private string _baseInfo;
-        string format = "项目编号:{0}\n项目名称:{1}\n项目类别:{2}\n项目日期:{3}\n签约单位:{4}\n合作单位:{5}\n项目描述:{6}";
+        readonly string format = "项目编号:{0}\n项目名称:{1}\n项目类别:{2}\n项目日期:{3}\n" +
+            "签约单位:{4}\n合作单位:{5}\n项目描述:{6}\n总费用:{7}\n" +
+            "应付款项一:{8}\n应付款项二:{9}\n应付款项三{10}"; 
         
         public string BaseInfo
         {
@@ -138,24 +142,12 @@ namespace SimpleCM.Data
                 DateTime datetime = Util.GetTimeFromMillis(ContractDate);
                 string dateInfo = string.Format("{0}年{1}月{2}日", datetime.Year, datetime.Month, datetime.Day);
                 return string.Format(format, ContractNumber, ContractName, ProjectCategory,
-                    dateInfo, ContractCompany, CooperatorCompany, ProjectDescription);
+                    dateInfo, ContractCompany, CooperatorCompany, ProjectDescription, Cost, Peceivables_1,Peceivables_2, Peceivables_3);
             }
             set
             {
                 _baseInfo = value;
                 OnPropertyChanged("BaseInfo");
-            }
-        }
-        public string Undefined { set; get; }
-
-        private bool _isReadOnly = false;
-        public bool IsReadOnly
-        {
-            get => _isReadOnly;
-            set
-            {
-                _isReadOnly = value;
-                OnPropertyChanged("IsReadOnly");
             }
         }
 
@@ -189,6 +181,31 @@ namespace SimpleCM.Data
                 return list;
             }
         }
+
+
+        public string BillNoteTostring()
+        {
+            //不能加@,否则原样输出\r\n,不换行
+            string format = "公司名称:{0}\n纳税人识别号:{1}\n地址:{2}\n电话:{3}\n银行:{4}\n账号:{5}";
+            return string.Format(format, BillNoteCompanyName, BillNoteTaxFileNum,
+                BillNoteAddress, BillNotePhoneNumber, BillNoteBank, BillNoteBankAccount);
+        }
+
+        public void FromBillNoteString()
+        {
+
+            string[] noteItems = _billNoteInfo.Split('\n');
+            if (noteItems != null && noteItems.Length == 6)
+            {
+                BillNoteCompanyName = noteItems[0].Substring(noteItems[0].IndexOf(':') + 1);
+                BillNoteTaxFileNum = noteItems[1].Substring(noteItems[1].IndexOf(':') + 1);
+                BillNoteAddress = noteItems[2].Substring(noteItems[2].IndexOf(':') + 1);
+                BillNotePhoneNumber = noteItems[3].Substring(noteItems[3].IndexOf(':') + 1);
+                BillNoteBank = noteItems[4].Substring(noteItems[4].IndexOf(':') + 1);
+                BillNoteBankAccount = noteItems[5].Substring(noteItems[5].IndexOf(':') + 1);
+            }
+        }
+
         private string _billNoteInfo;
         public string BillNoteInfo
         {
@@ -199,6 +216,90 @@ namespace SimpleCM.Data
                 OnPropertyChanged("BillNoteInfo");
             }
         }
+
+        private string _billNoteCompanyName;
+        public string BillNoteCompanyName
+        {
+            get
+            {
+                return _billNoteCompanyName;
+            }
+            set
+            {
+                _billNoteCompanyName = value;
+                OnPropertyChanged("BillNoteCompanyName");
+            }
+        }
+        private string _billNoteTaxFileNum;
+        public string BillNoteTaxFileNum
+        {
+            get
+            {
+                return _billNoteTaxFileNum;
+            }
+            set
+            {
+                _billNoteTaxFileNum = value;
+                OnPropertyChanged("BillNoteTaxFileNum");
+            }
+        }
+
+        private string _billNoteAddress;
+        public string BillNoteAddress
+        {
+            get
+            {
+                return _billNoteAddress;
+            }
+            set
+            {
+                _billNoteAddress = value;
+                OnPropertyChanged("BillNoteAddress");
+            }
+        }
+
+        private string _billNotePhoneNumber;
+        public string BillNotePhoneNumber
+        {
+            get
+            {
+                return _billNotePhoneNumber;
+            }
+            set
+            {
+                _billNotePhoneNumber = value;
+                OnPropertyChanged("BillNotePhoneNumber");
+            }
+        }
+
+        private string _billNoteBank;
+        public string BillNoteBank
+        {
+            get
+            {
+                return _billNoteBank;
+            }
+            set
+            {
+                _billNoteBank = value;
+                OnPropertyChanged("BillNoteBank");
+            }
+        }
+
+        private string _billNoteBankAccount;
+        public string BillNoteBankAccount
+        {
+            get
+            {
+                return _billNoteBankAccount;
+            }
+            set
+            {
+                _billNoteBankAccount = value;
+                OnPropertyChanged("BillNoteBankAccount");
+            }
+        }
+
 
 
         public override string ToString() => ContractName;

@@ -9,7 +9,7 @@ namespace SimpleCM.Data
         public void AddContact(Contract c)
         {
             Add(c);
-            ContractDB.Instance.Insert(c);
+            ContractDB.Instance.InsertItem(c);
         }
     }
 }

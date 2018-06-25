@@ -15,7 +15,7 @@ namespace SimpleCM.Data
                 DateTime datetime = Util.GetTimeFromMillis(weight);
 
 
-                return string.Format("{0}年{1}月{2}日", datetime.Year, datetime.Month, datetime.Day);
+                return string.Format("{0}/{1}/{2}日", datetime.Year, datetime.Month, datetime.Day);
             }
             catch
             {
@@ -46,7 +46,15 @@ namespace SimpleCM.Data
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string weight = (string)value;
+                return long.Parse(weight);
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
     }
 
