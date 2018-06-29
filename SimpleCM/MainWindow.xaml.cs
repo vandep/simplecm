@@ -13,6 +13,7 @@ namespace SimpleCM
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -65,6 +66,19 @@ namespace SimpleCM
                 ew.ShowDialog();
             }
 
+        }
+
+        private void Search_btn_click(object sender, RoutedEventArgs e)
+        {
+            string year = year_search_text.Text;
+            string type = type_search_text.Text;
+            string key = key_search_text.Text;
+            ContractDB.Instance.Search(year, type, key);
+        }
+
+        private void All_btn_click(object sender, RoutedEventArgs e)
+        {
+            ContractDB.Instance.LoadAll();
         }
     }
 }

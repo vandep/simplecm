@@ -49,8 +49,6 @@ namespace SimpleCM
 
         private void Submit_btn_Click(object sender, RoutedEventArgs e)
         {
-
-
             Contract contract = DetailEdit.GetContractFromText();
             if (contract == null)
             {

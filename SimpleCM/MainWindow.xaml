@@ -43,12 +43,35 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            
-        </Grid>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,10,20,10">
+            <TextBlock Foreground="#464646" VerticalAlignment="Center"
+                                   x:Name="year_textblock" 
+                                   FontSize="14"                                   
+                                   Text="年份" 
+                                   />
+            <TextBox Name="year_search_text" Width="80" Margin="10,0,5,0" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" VerticalContentAlignment="Center"/>
+
+            <TextBlock Foreground="#464646" VerticalAlignment="Center"
+                                   x:Name="Type_textblock" 
+                                   FontSize="14" 
+                                   Margin="8,0,0,0" 
+                                   Text="类型" 
+                                   />
+            <TextBox Name="type_search_text" Width="150" Margin="10,0,5,0" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" VerticalContentAlignment="Center"/>
+
+            <TextBlock Foreground="#464646" VerticalAlignment="Center"
+                                   x:Name="key_textblock" 
+                                   FontSize="14" 
+                                   Margin="8,0,0,0" 
+                                   Text="关键字" 
+                                   />
+            <TextBox Name="key_search_text" Width="200" Margin="10,0,5,0" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" VerticalContentAlignment="Center"/>
+            <Button Content="搜索" Margin="20,5,10,5" Width="50" FontSize="14" Click="Search_btn_click"/>
+            <Button Content="全部" Margin="10,5,20,5" Width="50" FontSize="14" Click="All_btn_click"/>
+        </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>

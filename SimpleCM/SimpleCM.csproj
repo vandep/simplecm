@@ -156,13 +156,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\zapya_common_input_modify_default.png" />
+    <Resource Include="resource\zapya_common_input_modify_default.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\zapya_common_input_modify_pressed.png" />
+    <Resource Include="resource\zapya_common_input_modify_pressed.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\zapya_common_input_frame.png" />
+    <Resource Include="resource\zapya_common_input_frame.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\zapya_common_radiobt_default.png" />
+    <Resource Include="resource\zapya_common_radiobt_selected.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

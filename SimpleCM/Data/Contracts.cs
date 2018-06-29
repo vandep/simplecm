@@ -10,6 +10,7 @@ namespace SimpleCM.Data
         {
             Add(c);
             ContractDB.Instance.InsertItem(c);
+            
         }
     }
 }

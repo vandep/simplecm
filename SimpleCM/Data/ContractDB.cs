@@ -176,6 +176,65 @@ namespace SimpleCM.Data
             return c;
         }
 
+        public void Search(string year, string type, string key)
+        {
+            Contracts.Instance.Clear();
+            string sql = "select * from " + CM_TABLE_NAME + " where ";
+            bool isAdd = false;
+            if (!string.IsNullOrEmpty(year))
+            {
+                long start = Util.GetTimeMillis(int.Parse(year), 1, 1);
+                long end = Util.GetTimeMillis(int.Parse(year) + 1, 1, 1);
+                sql += COLUMN_CM_DATE + ">= " + start
+                    + " AND " + COLUMN_CM_DATE + "<" + end;
+                isAdd = true;
+            }
+            if (!string.IsNullOrEmpty(type))
+            {
+                if (isAdd)
+                {
+                    sql += " AND " + COLUMN_PROJECT_CATE + "=" + type;
+                }
+                else
+                {
+                    sql += COLUMN_PROJECT_CATE + "=" + type;
+                    isAdd = true;
+                }
+            }
+            if (!string.IsNullOrEmpty(key))
+            {
+                if (isAdd)
+                {
+                    sql += " AND " + COLUMN_CM_DESCRIPTION + @" LIKE '%" + key + @"%'";
+                }
+                else
+                {
+                    sql += COLUMN_CM_DESCRIPTION + @" LIKE '%" + key + @"%'"
+                            + " OR " + COLUMN_CM_COOPERATOR + @" LIKE '%" + key + @"%'"
+                            + " OR " + COLUMN_CM_COMPANY + @" LIKE '%" + key + @"%'";
+                    isAdd = true;
+                }
+            }
+
+            using (SQLiteDataReader reader = sQLiteHelper.ExecuteReader(sql, null))
+            {
+                while (reader.Read())
+                {
+                    try
+                    {
+                        Contract c = ReadItem(reader);
+                        if (c != null && !string.IsNullOrEmpty(c.ContractName))
+                        {
+                            Contracts.Instance.Add(c);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Log.E("", "LoadAll item failed:" + e.Message);
+                    }
+                }
+            }
+        }
         public bool UpdateItem(long id, Contract contract)
         {
             SQLiteParameter[] parameters = new SQLiteParameter[]{
