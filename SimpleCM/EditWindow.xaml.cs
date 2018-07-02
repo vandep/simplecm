@@ -50,6 +50,10 @@ namespace SimpleCM
         private void Submit_btn_Click(object sender, RoutedEventArgs e)
         {
             Contract contract = DetailEdit.GetContractFromText();
+            if (contract.ContractDate <= 0 && mContract != null)
+            {
+                contract.ContractDate = mContract.ContractDate;
+            }
             if (contract == null)
             {
                 Log.D("", "项目名和项目编号都不能为空");
@@ -62,6 +66,8 @@ namespace SimpleCM
             contract.BillNoteBankAccount = bill_bank_acount.Text;
             contract.BillNotePhoneNumber = bill_phone.Text;
             contract.BillNoteInfo = contract.BillNoteTostring();
+            contract.BaseInfo = contract.BaseInfoTostring();
+
             string addInfo = "";
             if (AddtionList.Count > 0)
             {
@@ -76,10 +82,7 @@ namespace SimpleCM
             else
             {
                 //更新
-                if (contract.ContractDate <= 0)
-                {
-                    contract.ContractDate = mContract.ContractDate;
-                }
+
                 int index = Contracts.Instance.IndexOf(mContract);
                 Contracts.Instance.Remove(mContract);
                 Contracts.Instance.Insert(index, contract);

@@ -11,35 +11,21 @@ namespace SimpleCM.Data
         private const string COLUMN_CM_NUMBER = "text_field1";
         private const string COLUMN_CM_NAME = "text_field2";
         private const string COLUMN_CM_DATE = "int_field1";
-        private const string COLUMN_CM_DESCRIPTION = "text_field3";
-        private const string COLUMN_CM_COMPANY = "text_field4";
-        private const string COLUMN_CM_COOPERATOR = "text_field5";
-        
-        private const string COLUMN_CM_COST = "int_field2";
-        private const string COLUMN_CM_PE_1 = "int_field3";
-        private const string COLUMN_CM_PE_2 = "int_field4";
-        private const string COLUMN_CM_PE_3 = "int_field5";
-
-        private const string COLUMN_CM_ADDTIONAL = "text_field6";
-
-        private const string COLUMN_CM_BILL_NOTE = "text_field7";
-        private const string COLUMN_PROJECT_CATE = "text_field8";
+      
+        private const string COLUMN_CM_ADDTIONAL = "text_field3";
+        private const string COLUMN_CM_BILL_NOTE = "text_field4";
+        private const string COLUMN_PROJECT_CATE = "text_field5";
+        private const string COLUMN_BASE_INFO = "text_field6";
         private const string SELECT_ALL_CONTRACTS = "select * from " + CM_TABLE_NAME + " order by " + COLUMN_CM_DATE + " desc";
         private const string DELETE_CONTRACT = "delete from " + CM_TABLE_NAME + " where " + COLUMN_CM_NUMBER + "=@" + COLUMN_CM_NUMBER;
         private const string UPDATE_CONTRACT = "UPDATE cm_list set "
                                                 + COLUMN_CM_NUMBER + "=@" + COLUMN_CM_NUMBER + ","
                                                 + COLUMN_CM_NAME + "=@" + COLUMN_CM_NAME + ","
                                                 + COLUMN_CM_DATE + "=@" + COLUMN_CM_DATE + ","
-                                                + COLUMN_CM_DESCRIPTION + "=@" + COLUMN_CM_DESCRIPTION + ","
-                                                + COLUMN_CM_COMPANY + "=@" + COLUMN_CM_COMPANY + ","
-                                                + COLUMN_CM_COOPERATOR + "=@" + COLUMN_CM_COOPERATOR + ","
-                                                + COLUMN_CM_COST + "=@" + COLUMN_CM_COST + ","
-                                                + COLUMN_CM_PE_1 + "=@" + COLUMN_CM_PE_1 + ","
-                                                + COLUMN_CM_PE_2 + "=@" + COLUMN_CM_PE_2 + ","
-                                                + COLUMN_CM_PE_3 + "=@" + COLUMN_CM_PE_3 + ","
                                                 + COLUMN_CM_ADDTIONAL + "=@" + COLUMN_CM_ADDTIONAL + ","
                                                 + COLUMN_CM_BILL_NOTE + "=@" + COLUMN_CM_BILL_NOTE + ","
-                                                + COLUMN_PROJECT_CATE + "=@" + COLUMN_PROJECT_CATE
+                                                + COLUMN_PROJECT_CATE + "=@" + COLUMN_PROJECT_CATE + ","
+                                                + COLUMN_BASE_INFO + "=@" + COLUMN_BASE_INFO
                                                 + " where id=@id";
 
 
@@ -63,43 +49,25 @@ namespace SimpleCM.Data
                     + COLUMN_CM_NUMBER + ","
                     + COLUMN_CM_NAME + ","
                     + COLUMN_CM_DATE + ","
-                    + COLUMN_CM_DESCRIPTION + ","
-                    + COLUMN_CM_COMPANY + ","
-                    + COLUMN_CM_COOPERATOR + ","
-                    + COLUMN_CM_COST + ","
-                    + COLUMN_CM_PE_1 + ","
-                    + COLUMN_CM_PE_2 + ","
-                    + COLUMN_CM_PE_3 + ","
                     + COLUMN_CM_ADDTIONAL + ","
                     + COLUMN_CM_BILL_NOTE + ","
-                    + COLUMN_PROJECT_CATE
+                    + COLUMN_PROJECT_CATE + ","
+                    + COLUMN_BASE_INFO
                     + ") values("
                     + "@" + COLUMN_CM_NUMBER + ","
                     + "@" + COLUMN_CM_NAME + ","
                     + "@" + COLUMN_CM_DATE + ","
-                    + "@" + COLUMN_CM_DESCRIPTION + ","
-                    + "@" + COLUMN_CM_COMPANY + ","
-                    + "@" + COLUMN_CM_COOPERATOR + ","
-                    + "@" + COLUMN_CM_COST + ","
-                    + "@" + COLUMN_CM_PE_1 + ","
-                    + "@" + COLUMN_CM_PE_2 + ","
-                    + "@" + COLUMN_CM_PE_3 + ","
                     + "@" + COLUMN_CM_ADDTIONAL + ","
                     + "@" + COLUMN_CM_BILL_NOTE + ","
-                    + "@" + COLUMN_PROJECT_CATE
+                    + "@" + COLUMN_PROJECT_CATE + ","
+                    + "@" + COLUMN_BASE_INFO
                     + ")";
 
             SQLiteParameter[] parameters = new SQLiteParameter[]{
                 new SQLiteParameter("@" + COLUMN_CM_NUMBER, contract.ContractNumber),
                 new SQLiteParameter("@" + COLUMN_CM_NAME, contract.ContractName),
                 new SQLiteParameter("@" + COLUMN_CM_DATE, contract.ContractDate),
-                new SQLiteParameter("@" + COLUMN_CM_DESCRIPTION, contract.ProjectDescription),
-                new SQLiteParameter("@" + COLUMN_CM_COMPANY, contract.ContractCompany),
-                new SQLiteParameter("@" + COLUMN_CM_COOPERATOR, contract.CooperatorCompany),
-                new SQLiteParameter("@" + COLUMN_CM_COST, contract.Cost),
-                new SQLiteParameter("@" + COLUMN_CM_PE_1, contract.Peceivables_1),
-                new SQLiteParameter("@" + COLUMN_CM_PE_2, contract.Peceivables_2),
-                new SQLiteParameter("@" + COLUMN_CM_PE_3, contract.Peceivables_3),
+                new SQLiteParameter("@" + COLUMN_BASE_INFO, contract.BaseInfo),
                 new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL, contract.Aditionals),
                 new SQLiteParameter("@" + COLUMN_CM_BILL_NOTE, contract.BillNoteInfo),
                 new SQLiteParameter("@" + COLUMN_PROJECT_CATE, contract.ProjectCategory)
@@ -162,16 +130,11 @@ namespace SimpleCM.Data
             c.ContractNumber = sQLiteHelper.ReadString(reader, COLUMN_CM_NUMBER);
             c.ContractName = sQLiteHelper.ReadString(reader, COLUMN_CM_NAME);
             c.ContractDate = sQLiteHelper.ReadLong(reader, COLUMN_CM_DATE);
-            c.ContractCompany = sQLiteHelper.ReadString(reader, COLUMN_CM_COMPANY);
-            c.CooperatorCompany = sQLiteHelper.ReadString(reader, COLUMN_CM_COOPERATOR);
-            c.ProjectDescription = sQLiteHelper.ReadString(reader, COLUMN_CM_DESCRIPTION);
-            c.Cost = sQLiteHelper.ReadLong(reader, COLUMN_CM_COST);
-            c.Peceivables_1 = sQLiteHelper.ReadLong(reader, COLUMN_CM_PE_1);
-            c.Peceivables_2 = sQLiteHelper.ReadLong(reader, COLUMN_CM_PE_2);
-            c.Peceivables_3 = sQLiteHelper.ReadLong(reader, COLUMN_CM_PE_3);
+            c.BaseInfo = sQLiteHelper.ReadString(reader, COLUMN_BASE_INFO);
             c.Aditionals = sQLiteHelper.ReadString(reader, COLUMN_CM_ADDTIONAL);
             c.BillNoteInfo = sQLiteHelper.ReadString(reader, COLUMN_CM_BILL_NOTE);
             c.ProjectCategory = sQLiteHelper.ReadString(reader, COLUMN_PROJECT_CATE);
+            c.FromBaseInfo();
             c.FromBillNoteString();
             return c;
         }
@@ -183,21 +146,29 @@ namespace SimpleCM.Data
             bool isAdd = false;
             if (!string.IsNullOrEmpty(year))
             {
-                long start = Util.GetTimeMillis(int.Parse(year), 1, 1);
-                long end = Util.GetTimeMillis(int.Parse(year) + 1, 1, 1);
-                sql += COLUMN_CM_DATE + ">= " + start
-                    + " AND " + COLUMN_CM_DATE + "<" + end;
-                isAdd = true;
+                try
+                {
+                    long start = Util.GetTimeMillis(int.Parse(year), 1, 1);
+                    long end = Util.GetTimeMillis(int.Parse(year) + 1, 1, 1);
+                    sql += COLUMN_CM_DATE + ">= " + start
+                        + " AND " + COLUMN_CM_DATE + "<" + end;
+                    isAdd = true;
+                }
+                catch
+                {
+
+                }
+
             }
             if (!string.IsNullOrEmpty(type))
             {
                 if (isAdd)
                 {
-                    sql += " AND " + COLUMN_PROJECT_CATE + "=" + type;
+                    sql += " AND " + COLUMN_PROJECT_CATE + @"='" + type + @"'"; ;
                 }
                 else
                 {
-                    sql += COLUMN_PROJECT_CATE + "=" + type;
+                    sql += COLUMN_PROJECT_CATE + @"='" + type + @"'";
                     isAdd = true;
                 }
             }
@@ -205,13 +176,11 @@ namespace SimpleCM.Data
             {
                 if (isAdd)
                 {
-                    sql += " AND " + COLUMN_CM_DESCRIPTION + @" LIKE '%" + key + @"%'";
+                    sql += " AND " + COLUMN_BASE_INFO + @" LIKE '%" + key + @"%'";
                 }
                 else
                 {
-                    sql += COLUMN_CM_DESCRIPTION + @" LIKE '%" + key + @"%'"
-                            + " OR " + COLUMN_CM_COOPERATOR + @" LIKE '%" + key + @"%'"
-                            + " OR " + COLUMN_CM_COMPANY + @" LIKE '%" + key + @"%'";
+                    sql += COLUMN_BASE_INFO + @" LIKE '%" + key + @"%'";
                     isAdd = true;
                 }
             }
@@ -235,19 +204,14 @@ namespace SimpleCM.Data
                 }
             }
         }
+
         public bool UpdateItem(long id, Contract contract)
         {
             SQLiteParameter[] parameters = new SQLiteParameter[]{
                 new SQLiteParameter("@" + COLUMN_CM_NUMBER, contract.ContractNumber),
                 new SQLiteParameter("@" + COLUMN_CM_NAME, contract.ContractName),
                 new SQLiteParameter("@" + COLUMN_CM_DATE, contract.ContractDate),
-                new SQLiteParameter("@" + COLUMN_CM_DESCRIPTION, contract.ProjectDescription),
-                new SQLiteParameter("@" + COLUMN_CM_COMPANY, contract.ContractCompany),
-                new SQLiteParameter("@" + COLUMN_CM_COOPERATOR, contract.CooperatorCompany),
-                new SQLiteParameter("@" + COLUMN_CM_COST, contract.Cost),
-                new SQLiteParameter("@" + COLUMN_CM_PE_1, contract.Peceivables_1),
-                new SQLiteParameter("@" + COLUMN_CM_PE_2, contract.Peceivables_2),
-                new SQLiteParameter("@" + COLUMN_CM_PE_3, contract.Peceivables_3),
+                new SQLiteParameter("@" + COLUMN_BASE_INFO, contract.BaseInfo),
                 new SQLiteParameter("@" + COLUMN_CM_ADDTIONAL, contract.Aditionals),
                 new SQLiteParameter("@" + COLUMN_CM_BILL_NOTE, contract.BillNoteInfo),
                 new SQLiteParameter("@" + COLUMN_PROJECT_CATE, contract.ProjectCategory),

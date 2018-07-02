@@ -56,6 +56,7 @@ namespace SimpleCM
                     contract.Peceivables_3 = long.Parse(peceivables_3_edit.Text);
                 }                
                 contract.ProjectDescription = description_edit.Text;
+                contract.ProjectCategory = project_cat_edit.Text;
             }
             return contract;
         }

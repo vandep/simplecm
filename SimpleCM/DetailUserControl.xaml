@@ -54,7 +54,7 @@
                             FontSize="14" FontWeight="Bold" Text="项目类别:"/>
             <Grid Grid.Row="2" Grid.Column="1">
                 <TextBox x:Name="project_cat_edit" Padding="5,5,5,5" BorderThickness="2" BorderBrush="DarkGray" 
-                             FontSize="14" Text="{Binding Path=ContractName}"/>
+                             FontSize="14" Text="{Binding Path=ProjectCategory}"/>
             </Grid>
             
 

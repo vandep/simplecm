@@ -133,21 +133,41 @@ namespace SimpleCM.Data
         private string _baseInfo;
         readonly string format = "项目编号:{0}\n项目名称:{1}\n项目类别:{2}\n项目日期:{3}\n" +
             "签约单位:{4}\n合作单位:{5}\n项目描述:{6}\n总费用:{7}\n" +
-            "应付款项一:{8}\n应付款项二:{9}\n应付款项三{10}"; 
+            "应付款项一:{8}\n应付款项二:{9}\n应付款项三:{10}"; 
         
         public string BaseInfo
         {
-            get
-            {
-                DateTime datetime = Util.GetTimeFromMillis(ContractDate);
-                string dateInfo = string.Format("{0}年{1}月{2}日", datetime.Year, datetime.Month, datetime.Day);
-                return string.Format(format, ContractNumber, ContractName, ProjectCategory,
-                    dateInfo, ContractCompany, CooperatorCompany, ProjectDescription, Cost, Peceivables_1,Peceivables_2, Peceivables_3);
-            }
+            get => _baseInfo;
             set
             {
                 _baseInfo = value;
                 OnPropertyChanged("BaseInfo");
+            }
+        }
+
+        public string BaseInfoTostring()
+        {
+            DateTime datetime = Util.GetTimeFromMillis(ContractDate);
+            string dateInfo = string.Format("{0}年{1}月{2}日", datetime.Year, datetime.Month, datetime.Day);
+            return string.Format(format, ContractNumber, ContractName, ProjectCategory,
+                dateInfo, ContractCompany, CooperatorCompany, ProjectDescription, Cost, Peceivables_1, Peceivables_2, Peceivables_3);
+        }
+
+        public void FromBaseInfo()
+        {
+            string[] infos = _baseInfo.Split('\n');
+            if (infos != null && infos.Length == 11)
+            {
+                //ContractNumber = infos[0].Substring(infos[0].IndexOf(':') + 1);
+                //ContractName = infos[1].Substring(infos[1].IndexOf(':') + 1);
+                //ProjectCategory = infos[2].Substring(infos[2].IndexOf(':') + 1);
+                ContractCompany = infos[4].Substring(infos[4].IndexOf(':') + 1);
+                CooperatorCompany = infos[5].Substring(infos[5].IndexOf(':') + 1);
+                ProjectDescription = infos[6].Substring(infos[6].IndexOf(':') + 1);
+                Cost = long.Parse(infos[7].Substring(infos[7].IndexOf(':') + 1));
+                Peceivables_1 = long.Parse(infos[8].Substring(infos[8].IndexOf(':') + 1));
+                Peceivables_2= long.Parse(infos[9].Substring(infos[9].IndexOf(':') + 1));
+                Peceivables_3 = long.Parse(infos[10].Substring(infos[10].IndexOf(':') + 1));
             }
         }
 
